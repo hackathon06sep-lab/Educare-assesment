@@ -1,0 +1,261 @@
+{
+  "info": {
+    "_postman_id": "a4527df2-9198-4aa2-83ef-4cf013567f6f",
+    "name": "School Management API",
+    "description": "Postman collection for testing the addSchool and listSchools APIs. Set the baseUrl collection variable to your deployed API URL or local server URL.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Expected 200 response with a success message when the API is running."
+      },
+      "response": [
+        {
+          "name": "Success",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"School Management API is running\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Mathura Road, New Delhi\",\n  \"latitude\": 28.594,\n  \"longitude\": 77.25\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/addSchool",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "addSchool"
+          ]
+        },
+        "description": "Adds a school. Required JSON fields: name, address, latitude, longitude. Expected 201 on success."
+      },
+      "response": [
+        {
+          "name": "Created",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Mathura Road, New Delhi\",\n  \"latitude\": 28.594,\n  \"longitude\": 77.25\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/addSchool",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "addSchool"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"School added successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Delhi Public School\",\n    \"address\": \"Mathura Road, New Delhi\",\n    \"latitude\": 28.594,\n    \"longitude\": 77.25\n  }\n}"
+        },
+        {
+          "name": "Validation Error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"address\": \"\",\n  \"latitude\": 100,\n  \"longitude\": \"invalid\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/addSchool",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "addSchool"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"message\": \"Validation failed\",\n  \"errors\": {\n    \"name\": \"name is required and must be a non-empty string\",\n    \"address\": \"address is required and must be a non-empty string\",\n    \"latitude\": \"latitude must be between -90 and 90\",\n    \"longitude\": \"longitude must be a valid number\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Schools",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/listSchools?latitude=28.6139&longitude=77.2090",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "listSchools"
+          ],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "28.6139"
+            },
+            {
+              "key": "longitude",
+              "value": "77.2090"
+            }
+          ]
+        },
+        "description": "Returns schools sorted by distance from the provided latitude and longitude. Expected 200 on success."
+      },
+      "response": [
+        {
+          "name": "Success",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/listSchools?latitude=28.6139&longitude=77.2090",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "28.6139"
+                },
+                {
+                  "key": "longitude",
+                  "value": "77.2090"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Schools retrieved successfully\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Delhi Public School\",\n      \"address\": \"Mathura Road, New Delhi\",\n      \"latitude\": 28.594,\n      \"longitude\": 77.25,\n      \"distanceKm\": 4.553\n    }\n  ]\n}"
+        },
+        {
+          "name": "Validation Error",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/listSchools?latitude=abc&longitude=181",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "abc"
+                },
+                {
+                  "key": "longitude",
+                  "value": "181"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"message\": \"Validation failed\",\n  \"errors\": {\n    \"latitude\": \"latitude must be a valid number\",\n    \"longitude\": \"longitude must be between -180 and 180\"\n  }\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}

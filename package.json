@@ -1,0 +1,30 @@
+{
+  "name": "school-management-api",
+  "version": "1.0.0",
+  "description": "Node.js, Express, and MySQL APIs for adding schools and listing them by proximity.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "school-management"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
