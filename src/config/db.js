@@ -15,7 +15,10 @@ function parseConnectionUrl(connectionUrl) {
 }
 
 function getDatabaseConfig() {
-  const connectionUrl = process.env.MYSQL_URL || process.env.DATABASE_URL;
+  const connectionUrl =
+    process.env.MYSQL_PUBLIC_URL ||
+    process.env.MYSQL_URL ||
+    process.env.DATABASE_URL;
 
   if (connectionUrl && connectionUrl.startsWith('mysql')) {
     return parseConnectionUrl(connectionUrl);

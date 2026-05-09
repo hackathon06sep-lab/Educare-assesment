@@ -144,6 +144,7 @@ MYSQLPORT=<railway-mysql-port>
 MYSQLUSER=<railway-mysql-user>
 MYSQLPASSWORD=<railway-mysql-password>
 MYSQLDATABASE=<railway-mysql-database>
+MYSQL_PUBLIC_URL=<railway-mysql-public-url>
 MYSQL_URL=<railway-mysql-url>
 ```
 
