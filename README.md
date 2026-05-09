@@ -136,4 +136,15 @@ DB_NAME=school_management
 DB_CONNECTION_LIMIT=10
 ```
 
-Run `schema.sql` once against the production MySQL database before using the live endpoints.
+On Railway, the MySQL plugin may provide these variables instead:
+
+```text
+MYSQLHOST=<railway-mysql-host>
+MYSQLPORT=<railway-mysql-port>
+MYSQLUSER=<railway-mysql-user>
+MYSQLPASSWORD=<railway-mysql-password>
+MYSQLDATABASE=<railway-mysql-database>
+MYSQL_URL=<railway-mysql-url>
+```
+
+The server creates the `schools` table automatically on startup if it does not already exist. You can still run `schema.sql` manually if you prefer to initialize the database yourself.
