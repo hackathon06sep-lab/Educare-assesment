@@ -3,7 +3,21 @@ require('dotenv').config();
 const mysql = require('mysql2/promise');
 
 function parseConnectionUrl(connectionUrl) {
-  const url = new URL(connectionUrl);
+  let url;
+
+  try {
+    url = new URL(connectionUrl);
+  } catch (_error) {
+    throw new Error(
+      'Invalid MySQL connection URL. Check MYSQL_PUBLIC_URL, MYSQL_URL, or DATABASE_URL in your environment variables.'
+    );
+  }
+
+  if (!url.hostname || !url.username || !url.pathname.replace(/^\//, '')) {
+    throw new Error(
+      'Incomplete MySQL connection URL. It must include user, password, host, port, and database name.'
+    );
+  }
 
   return {
     host: url.hostname,
